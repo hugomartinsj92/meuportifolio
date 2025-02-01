@@ -1,0 +1,38 @@
+/* Estilo geral */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: limegreen;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+}
+
+#matrix-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+#matrix-text {
+    font-size: 18px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow: hidden;
+}
+
+#back-to-index {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: limegreen;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#back-to-index:hover {
+    text-decoration: underline;
+}

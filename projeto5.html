@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Concurso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        #progress-container {
+            width: 50px;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+
+        #progress-bar {
+            width: 100%;
+            background-color: #4CAF50;
+            transition: height 0.5s ease;
+            position: absolute;
+            bottom: 0;
+            height: 0%;
+        }
+
+        #quiz-container {
+            flex: 1;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .question {
+            display: none;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        .option {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .option:hover {
+            background-color: #f8f8f8;
+        }
+
+        .correct {
+            background-color: #d4edda !important;
+        }
+
+        .wrong {
+            background-color: #f8d7da !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="quiz-container">
+        <div id="questions">
+            <!-- As questões serão inseridas aqui via JavaScript -->
+        </div>
+    </div>
+
+    <script>
+const questions = [
+    {
+        question: "Qual é o principal objetivo da Nova Gestão Pública (New Public Management)?",
+        options: [
+            "Centralização das decisões no Estado",
+            "Aumentar a eficiência com práticas de mercado",
+            "Priorizar a burocracia tradicional",
+            "Eliminar a participação da sociedade civil"
+        ],
+        correct: 1
+    },
+    {
+        question: "Max Weber, em sua teoria da burocracia, destacou como características principais:",
+        options: [
+            "Flexibilidade e descentralização",
+            "Hierarquia, impessoalidade e regras formais",
+            "Subjetividade e informalidade",
+            "Foco exclusivo em resultados financeiros"
+        ],
+        correct: 1
+    },
+    {
+        question: "O ciclo de políticas públicas inclui as seguintes etapas, EXCETO:",
+        options: [
+            "Formulação",
+            "Implementação",
+            "Privatização",
+            "Avaliação"
+        ],
+        correct: 2
+    },
+    {
+        question: "O conceito de 'governança' refere-se a:",
+        options: [
+            "Controle exclusivo do governo sobre a sociedade",
+            "Processos de decisão envolvendo múltiplos atores (Estado, mercado e sociedade)",
+            "Centralização de poder no Executivo",
+            "Eliminação de mecanismos de transparência"
+        ],
+        correct: 1
+    },
+    {
+        question: "O princípio da 'accountability' na Administração Pública está relacionado a:",
+        options: [
+            "Sigilo das informações governamentais",
+            "Prestação de contas e responsabilização",
+            "Contratação de servidores temporários",
+            "Redução de gastos públicos"
+        ],
+        correct: 1
+    },
+    {
+        question: "Segundo a Constituição Federal brasileira, os princípios da Administração Pública são:",
+        options: [
+            "Legalidade, impessoalidade, moralidade, publicidade e eficiência",
+            "Sigilo, hierarquia, autoridade e centralização",
+            "Rentabilidade, competitividade e informalidade",
+            "Subjetividade, flexibilidade e privatização"
+        ],
+        correct: 0
+    },
+    {
+        question: "O modelo de 'New Public Service' (Novo Serviço Público) enfatiza:",
+        options: [
+            "Foco exclusivo em métricas de desempenho",
+            "Valorização da cidadania e diálogo com a sociedade",
+            "Redução do papel do Estado na economia",
+            "Controle hierárquico rígido"
+        ],
+        correct: 1
+    },
+    {
+        question: "O que são Parcerias Público-Privadas (PPPs)?",
+        options: [
+            "Transferência total de serviços públicos para empresas",
+            "Colaboração entre setor público e privado para ofertar serviços de interesse coletivo",
+            "Fusão de empresas estatais com privadas",
+            "Licitações simplificadas para obras emergenciais"
+        ],
+        correct: 1
+    },
+    {
+        question: "A descentralização administrativa refere-se a:",
+        options: [
+            "Concentração de poder no governo federal",
+            "Transferência de atribuições para entes locais ou regionais",
+            "Eliminação de municípios e estados",
+            "Terceirização de todas as atividades públicas"
+        ],
+        correct: 1
+    },
+    {
+        question: "O Sistema Único de Saúde (SUS) no Brasil é um exemplo de:",
+        options: [
+            "Política pública universalista",
+            "Privatização da saúde",
+            "Centralização administrativa",
+            "Gestão sem participação social"
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual lei regula as licitações e contratos administrativos no Brasil?",
+        options: [
+            "Lei 8.666/1993",
+            "Lei 12.846/2013 (Anticorrupção)",
+            "Lei 9.784/1999 (Processo Administrativo)",
+            "Lei 13.303/2016 (Estatais)"
+        ],
+        correct: 0
+    },
+    {
+        question: "Organizações do Terceiro Setor que colaboram com o Estado são:",
+        options: [
+            "Empresas públicas",
+            "ONGs e OSCIPs",
+            "Autarquias",
+            "Sociedades de economia mista"
+        ],
+        correct: 1
+    },
+    {
+        question: "O conceito de 'accountability horizontal' refere-se a:",
+        options: [
+            "Controle social exercido pela população",
+            "Fiscalização mútua entre poderes (Ex.: Legislativo sobre Executivo)",
+            "Auditorias internas em empresas privadas",
+            "Centralização de informações no governo"
+        ],
+        correct: 1
+    },
+    {
+        question: "A teoria da 'Escolha Pública' (Public Choice) analisa:",
+        options: [
+            "Decisões coletivas com base no interesse individual",
+            "Planejamento centralizado pelo Estado",
+            "Eliminação de mecanismos de mercado",
+            "Priorização exclusiva do bem comum"
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual é o foco da gestão por resultados na Administração Pública?",
+        options: [
+            "Cumprimento de processos burocráticos",
+            "Alcançar metas de eficiência e impacto social",
+            "Manter estruturas hierárquicas rígidas",
+            "Ampliar o número de servidores públicos"
+        ],
+        correct: 1
+    },
+    {
+        question: "O que é o princípio da 'eficiência' na Administração Pública?",
+        options: [
+            "Realizar atividades com mínimo de recursos e máximo resultado",
+            "Priorizar contratos sem licitação",
+            "Manter práticas tradicionais independentemente de resultados",
+            "Reduzir a transparência para ganhar agilidade"
+        ],
+        correct: 0
+    },
+    {
+        question: "O que caracteriza um 'Estado mínimo'?",
+        options: [
+            "Intervenção estatal ampla em serviços sociais",
+            "Redução da atuação do Estado à segurança, justiça e infraestrutura básica",
+            "Controle total da economia pelo governo",
+            "Centralização de políticas públicas"
+        ],
+        correct: 1
+    },
+    {
+        question: "O que é o Plano Plurianual (PPA)?",
+        options: [
+            "Instrumento de planejamento governamental para 4 anos",
+            "Lei que define o orçamento anual da União",
+            "Política de austeridade fiscal",
+            "Regulamentação de licitações"
+        ],
+        correct: 0
+    },
+    {
+        question: "Qual órgão é responsável pelo controle externo da Administração Pública no Brasil?",
+        options: [
+            "Tribunal de Contas da União (TCU)",
+            "Ministério Público Federal (MPF)",
+            "Controladoria-Geral da União (CGU)",
+            "Congresso Nacional"
+        ],
+        correct: 0
+    },
+    {
+        question: "O conceito de 'governo aberto' (open government) prioriza:",
+        options: [
+            "Transparência, participação social e inovação tecnológica",
+            "Sigilo de dados governamentais",
+            "Centralização de informações",
+            "Redução de canais de comunicação com a sociedade"
+        ],
+        correct: 0
+    }
+];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function initQuiz() {
+            const questionsContainer = document.getElementById('questions');
+            
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <h3>${q.question}</h3>
+                    ${q.options.map((opt, i) => `
+                        <div class="option" onclick="checkAnswer(${index}, ${i})">${opt}</div>
+                    `).join('')}
+                `;
+                questionsContainer.appendChild(questionDiv);
+            });
+
+            showQuestion(currentQuestion);
+            updateProgress();
+        }
+
+        function showQuestion(index) {
+            document.querySelectorAll('.question').forEach(q => q.classList.remove('active'));
+            document.querySelectorAll('.question')[index].classList.add('active');
+        }
+
+        function checkAnswer(questionIndex, selectedIndex) {
+            const question = questions[questionIndex];
+            const options = document.querySelectorAll(`.question:nth-child(${questionIndex + 1}) .option`);
+            
+            if (selectedIndex === question.correct) {
+                score++;
+                currentQuestion++;
+                
+                if (currentQuestion === questions.length) {
+                    alert('Parabéns! Você acertou todas!');
+                    resetQuiz();
+                } else {
+                    showQuestion(currentQuestion);
+                    updateProgress();
+                }
+            } else {
+                alert('Resposta incorreta! Tente novamente.');
+                resetQuiz();
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentQuestion / questions.length) * 100;
+            document.getElementById('progress-bar').style.height = `${progress}%`;
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            showQuestion(0);
+            updateProgress();
+        }
+
+        initQuiz();
+    </script>
+</body>
+</html>

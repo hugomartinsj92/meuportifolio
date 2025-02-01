@@ -1,0 +1,17 @@
+[
+  {
+    "nome": "Maçã",
+    "imagem": "imagens/fruta.jpg",
+    "preco": 5.00
+  },
+  {
+    "nome": "Leite",
+    "imagem": "imagens/leite.jpg",
+    "preco": 3.50
+  },
+  {
+    "nome": "Pão",
+    "imagem": "imagens/pao.jpg",
+    "preco": 4.00
+  }
+]

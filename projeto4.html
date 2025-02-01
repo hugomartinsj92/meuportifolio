@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relógio de Poker</title>
+  <link rel="stylesheet" href="stylesrelo.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Relógio de Poker</h1>
+    <div class="settings">
+      <label for="blind-time">Tempo dos Blinds (minutos):</label>
+      <input type="number" id="blind-time" placeholder="Ex: 5">
+
+      <label for="blind-levels">Valor dos Blinds por Nível:</label>
+      <textarea id="blind-levels" placeholder="Ex: 10/20, 20/40, 40/80"></textarea>
+
+      <label for="prize-info">Premiação ou Informações Adicionais:</label>
+      <textarea id="prize-info" placeholder="Ex: 1º Lugar - R$ 500"></textarea>
+
+      <button id="start-timer">Iniciar Relógio</button>
+      <button id="reset-timer">Resetar</button>
+    </div>
+
+    <div class="clock">
+      <div id="timer">00:00</div>
+      <div id="current-blind">Blinds: --/--</div>
+      <div id="prize-display"></div>
+    </div>
+  </div>
+
+  <script src="scriptsrelo.js"></script>
+</body>
+</html>
