@@ -90,3 +90,68 @@ document.addEventListener("DOMContentLoaded", () => {
     createMatrixEffect();
     document.getElementById('info-text').textContent = texto;
 });
+
+// Adiciona estilos CSS
+const style = document.createElement('style');
+style.textContent = `
+body {
+    background-color: black;
+    color: #00FF00;
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    overflow-y: scroll; /* Permite rolagem vertical */
+}
+
+#back-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+canvas {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#info-container {
+    position: relative;
+    top: 50px;
+    left: 50px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #00FF00;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1000;
+    width: calc(100% - 100px);
+    max-width: 800px;
+}
+
+#info-text {
+    white-space: pre-wrap; /* Preserve whitespace and line breaks */
+}
+
+#video-container {
+    position: relative;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 800px;
+    z-index: 1000;
+}
+
+video {
+    width: 100%;
+    height: auto;
+}
+`;
+document.head.appendChild(style);
