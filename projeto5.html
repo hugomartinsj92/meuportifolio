@@ -74,6 +74,8 @@
         </div>
     </div>
 
+    <audio id="celebration-audio" src="path/to/your/music.mp3" loop></audio>
+
     <script>
 const questions = [
     {
@@ -313,6 +315,10 @@ const questions = [
                 score++;
                 currentQuestion++;
                 
+                if (score === 3) {
+                    document.getElementById('celebration-audio.mp4').play();
+                }
+
                 if (currentQuestion === questions.length) {
                     alert('Parabéns! Você acertou todas!');
                     resetQuiz();

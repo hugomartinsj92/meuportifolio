@@ -85,10 +85,25 @@ function createMatrixEffect() {
     setInterval(draw, 33);
 }
 
+// Função para criar o efeito de digitação
+function typeWriterEffect(element, text, speed = 50) {
+    let index = 0;
+    function type() {
+        if (index < text.length) {
+            element.textContent += text.charAt(index);
+            index++;
+            setTimeout(type, speed);
+        }
+    }
+    element.textContent = ""; // Limpa antes de iniciar
+    type();
+}
+
 // Inicializa a animação e exibe o texto
 document.addEventListener("DOMContentLoaded", () => {
     createMatrixEffect();
-    document.getElementById('info-text').textContent = texto;
+    const infoTextElement = document.getElementById('info-text');
+    typeWriterEffect(infoTextElement, texto, 30); // Velocidade da digitação
 });
 
 // Adiciona estilos CSS
